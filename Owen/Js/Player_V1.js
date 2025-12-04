@@ -25,6 +25,8 @@ class Player {
         this.isJumping = true;
         this.score = 0;
         this.maxHeight = 0;
+
+        this.fallThreshold = 1200; 
     }
     
     /**
@@ -91,6 +93,10 @@ class Player {
             this.score = Math.floor((2500 - this.maxHeight) / 10); // Score based on height
             if (this.score < 0) this.score = 0;
         }
+    }
+
+    hasFallenTooFar() {
+        return this.y > this.maxHeight + this.fallThreshold;
     }
     
     /**

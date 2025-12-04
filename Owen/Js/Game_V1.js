@@ -20,6 +20,9 @@ class Game {
         
         // Initialize
         this.reset();
+
+        //level
+        this.currentLevel = 1;
     }
     
     /**
@@ -63,11 +66,15 @@ class Game {
         
         // Update platforms
         this.platformManager.update(this.player.y);
+        // Get current level from platform manager and apply to player physics
+        this.currentLevel = this.platformManager.getLevel();
+        
         
         // Check if player fell off screen
-        if (this.player.isFallenOff(this.gameHeight)) {
+        if (this.player.hasFallenTooFar()) {
             this.endGame();
         }
+          
         
         // Update score
         this.currentScore = this.player.score;
@@ -143,8 +150,10 @@ class Game {
         textSize(20);
         textAlign(LEFT);
         text('Score: ' + this.currentScore, 20, 30);
-        text('High Score: ' + this.highScore, 20, 60);
-        }
+        text('Level: ' + this.currentLevel, 20, 60);
+        text('High Score: ' + this.highScore, 20, 90);
+      }
+      
     
     /**
      * Display start screen
@@ -165,6 +174,8 @@ class Game {
         text('Use ARROW KEYS or A/D to move', this.gameWidth / 2, this.gameHeight / 2 - 20);
         text('Jump to higher platforms', this.gameWidth / 2, this.gameHeight / 2 + 20);
         text('Avoid falling off the bottom!', this.gameWidth / 2, this.gameHeight / 2 + 60);
+        text('Difficulty increases with each LEVEL!', this.gameWidth / 2, this.gameHeight / 2 + 100);
+
         
         textSize(24);
         fill(100, 200, 255);
@@ -190,7 +201,8 @@ class Game {
         
         fill(255);
         textSize(32);
-        text('Score: ' + this.currentScore, this.gameWidth / 2, this.gameHeight / 2 - 20);
+        text('Score: ' + this.currentScore, this.gameWidth / 2, this.gameHeight / 2 + 20);
+        text('Level Reached: ' + this.currentLevel, this.gameWidth / 2, this.gameHeight / 2 - 30);
         
         textSize(20);
         if (this.currentScore === this.highScore && this.currentScore > 0) {

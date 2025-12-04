@@ -14,12 +14,16 @@ class PlatformManager {
         this.verticalGap = 80; // Space between platforms initially
         this.horizontalVariance = gameWidth - 40;
         
-        // Difficulty scaling
-        this.difficulty = 0;
+        // Difficulty scaling (range 0-)
+        this.difficulty = 10;
         this.platformSpacing = this.verticalGap;
         
         // Initialize with starting platforms
         this.generateInitialPlatforms();
+
+        //Inital level setting
+        this.level = 1;
+        this.baseVerticalGap = 80; 
     }
     
     /**
@@ -38,27 +42,59 @@ class PlatformManager {
      * Add a random platform type at given position
      */
     addRandomPlatform(x, y) {
-        const rand = Math.random();
         let platform;
-        
-        // Difficulty affects platform type distribution
-        // Higher difficulty = more moving/breaking platforms
-        const difficultyFactor = Math.min(this.difficulty / 10000, 0.7);
-        
-        if (rand < 0.6) {
-            // 60% normal platforms
-            platform = new Platform(x, y, this.platformWidth, this.platformHeight, 'normal');
-        } else if (rand < 0.8) {
-            // 20% moving platforms
-            platform = new MovingPlatform(x, y, this.platformWidth, this.platformHeight);
-        } else {
-            // 20% breaking platforms
-            platform = new BreakingPlatform(x, y, this.platformWidth, this.platformHeight);
-        }
-        
+        const rand = Math.random();
+        const difficultyFactor = this.getDifficultyMultiplier(this.level);
+        const normalThreshold = Math.max(0.3, 0.7 - difficultyFactor);
+        const movingThreshold = normalThreshold + 0.15 + (difficultyFactor * 0.3);
+
+            if (rand < normalThreshold) {
+                platform = new Platform(x, y, this.platformWidth, this.platformHeight, 'normal');
+            } else if (rand < movingThreshold) {
+                platform = new MovingPlatform(x, y, this.platformWidth, this.platformHeight);
+            } else {
+                platform = new BreakingPlatform(x, y, this.platformWidth, this.platformHeight);
+            }
+
         this.platforms.push(platform);
     }
+
     
+    /**
+    * Calculate level based on player height
+    * Every 1500 pixels = 1 level
+    */
+    updateLevel(playerY) {
+        const levelThreshold = 1500;
+        this.level = Math.floor(Math.abs(playerY) / levelThreshold) + 1;
+        const levelCap = Math.min(this.level, 15);
+        return levelCap;
+    }
+
+    /**
+    * Get difficulty multiplier based on level
+    */
+    getDifficultyMultiplier(level) {
+        return Math.min((level - 1) / 10, 0.7);
+    }
+
+    /**
+    * Get platform spacing based on level
+    */
+    getPlatformSpacing(level) {
+        const minGap = 40;
+        const maxGap = 80;
+        const reduction = (level - 1) * 2.5;
+        return Math.max(minGap, maxGap - reduction);
+    }
+
+    /**
+    * Get current level (for display)
+    */
+    getLevel() {
+        return this.level;
+    }
+
     /**
      * Generate new platforms as player moves up
      */
@@ -104,20 +140,18 @@ class PlatformManager {
      * Update all platforms
      */
     update(playerY) {
-        // Update each platform (for moving/breaking effects)
         for (let platform of this.platforms) {
-            platform.update();
+          platform.update();
         }
-        
-        // Generate new platforms as needed
+      
+        // ADD THESE LINES:
+        this.updateLevel(playerY);
+        this.platformSpacing = this.getPlatformSpacing(this.level);
         this.generatePlatforms(playerY);
-        
-        // Clean up old platforms
         this.cleanup(playerY);
-        
-        // Update difficulty based on height
         this.difficulty = Math.abs(playerY);
     }
+      
     
     /**
      * Check collision with all platforms
