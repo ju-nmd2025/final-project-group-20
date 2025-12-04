@@ -97,10 +97,10 @@ class Game {
      * Get camera offset (for scrolling)
      */
     getCameraY() {
-        // Camera follows player, keeping them in upper portion of screen
-        const targetCameraY = this.player.y - this.gameHeight / 3;
-        return Math.max(targetCameraY, 0);
+        // Simple: keep player in upper third
+        return Math.max(this.player.y - this.gameHeight / 3);
     }
+    
     
     /**
      * Display the game
@@ -144,12 +144,7 @@ class Game {
         textAlign(LEFT);
         text('Score: ' + this.currentScore, 20, 30);
         text('High Score: ' + this.highScore, 20, 60);
-        
-        // Debug info
-        textSize(12);
-        text('Platforms: ' + this.platformManager.getActivePlatformCount(), 20, 85);
-        text('Height: ' + Math.floor(Math.abs(this.player.maxHeight)), 20, 105);
-    }
+        }
     
     /**
      * Display start screen

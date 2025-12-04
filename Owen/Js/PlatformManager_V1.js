@@ -157,4 +157,5 @@ class PlatformManager {
     getActivePlatformCount() {
         return this.platforms.filter(p => p.isActive).length;
     }
+
 }
