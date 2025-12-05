@@ -6,8 +6,8 @@ class Player {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 30;
-        this.height = 30;
+        this.width = 50;
+        this.height = 70;
         
         // Physics
         this.velocityY = 0;
@@ -103,14 +103,13 @@ class Player {
      * Display player character
      */
     display() {
-        fill(255, 100, 100); // Red color
-        rect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height, 5);
-        
-        // Draw eyes
-        fill(0);
-        circle(this.x - 8, this.y - 8, 5);
-        circle(this.x + 8, this.y - 8, 5);
-    }
+        image(characterImage, 
+              this.x - this.width / 2, 
+              this.y - this.height / 2, 
+              this.width, 
+              this.height);
+      }
+      
     
     /**
      * Check if player has fallen off screen

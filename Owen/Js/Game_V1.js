@@ -179,7 +179,7 @@ class Game {
         
         textSize(24);
         fill(100, 200, 255);
-        text('Press SPACE to Start', this.gameWidth / 2, this.gameHeight / 2 + 120);
+        text('Press SPACE to Start', this.gameWidth / 2, this.gameHeight / 2 + 140);
         
         textAlign(LEFT);
     }

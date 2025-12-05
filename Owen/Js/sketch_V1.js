@@ -5,6 +5,11 @@
 
 // Global game instance
 let game;
+let characterImage;
+
+function preload() {
+    characterImage = loadImage('assets/KEN.png');  // Put your image filename here
+  }
 
 /**
  * p5.js setup function
