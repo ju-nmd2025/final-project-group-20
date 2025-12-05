@@ -8,7 +8,7 @@ let game;
 let characterImage;
 
 function preload() {
-  characterImage = loadImage("assets/KEN.png"); // Put your image filename here
+  characterImage = loadImage("ju.jpg"); // Put your image filename here
 }
 
 /**

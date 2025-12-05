@@ -3,7 +3,7 @@
  * Handles the player character, movement, jumping, and physics
  */
 class Player {
-  constructor(x, y) {
+  constructor(x, y, img) {
     this.x = x;
     this.y = y;
     this.img = img;
