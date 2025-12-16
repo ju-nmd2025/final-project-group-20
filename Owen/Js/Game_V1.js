@@ -2,6 +2,7 @@
  * Game Class
  * Main game controller handling states, logic, and flow
  */
+
 class Game {
   constructor(width, height) {
     this.gameWidth = width;
@@ -30,11 +31,7 @@ class Game {
    */
   reset() {
     // Create player at center bottom
-    this.player = new Player(
-      this.gameWidth / 2,
-      this.gameHeight - 100,
-      characterImage
-    );
+    this.player = new Player(this.gameWidth / 2, this.gameHeight - 100, null);
 
     // Create platform manager
     this.platformManager = new PlatformManager(this.gameWidth, this.gameHeight);
@@ -257,5 +254,17 @@ class Game {
         this.startGame();
       }
     }
+  }
+  update() {
+    console.log("Player position:", this.x, this.y);
+    console.log("Velocity:", this.velocityX, this.velocityY);
+    console.log(
+      "Keys pressed - Left:",
+      this.movingLeft,
+      "Right:",
+      this.movingRight
+    );
+
+    this.handleInput();
   }
 }

@@ -7,19 +7,13 @@
 let game;
 let characterImage;
 
-function preload() {
-  characterImage = loadImage("ju.jpg"); // Put your image filename here
-}
-
 /**
  * p5.js setup function
  */
+
 function setup() {
-  // Create canvas
   const canvas = createCanvas(400, 600);
   canvas.parent("p5-container");
-
-  // Initialize game
   game = new Game(width, height);
 }
 
