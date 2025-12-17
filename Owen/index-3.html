@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doodle Jump Game</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@2.1.1/lib/p5.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #1a1a2e;
-            font-family: 'Arial', sans-serif;
-            color: #fff;
-        }
-        
-        #p5-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        canvas {
-            border: 2px solid #00d4ff;
-            background-color: #0f3460;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        }
-        
-        .info {
-            text-align: center;
-            font-size: 14px;
-            color: #aaa;
-        }
-        
-        .info h2 {
-            color: #00d4ff;
-            margin-bottom: 10px;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #1a1a2e;
+        font-family: "Arial", sans-serif;
+        color: #fff;
+      }
+
+      #p5-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      canvas {
+        border: 2px solid #00d4ff;
+        background-color: #0f3460;
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+      }
+
+      .info {
+        text-align: center;
+        font-size: 14px;
+        color: #aaa;
+      }
+
+      .info h2 {
+        color: #00d4ff;
+        margin-bottom: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="p5-container">
-        <div class="info">
-            <h2>Doodle Jump</h2>
-            <p>Use ARROW KEYS or A/D to move left/right</p>
-            <p>Jump to higher platforms and avoid falling!</p>
-        </div>
+      <div class="info">
+        <h2>Doodle Jump</h2>
+        <p>Use ARROW KEYS or A/D to move left/right</p>
+        <p>Jump to higher platforms and avoid falling!</p>
+      </div>
     </div>
 
     <!-- Load game classes -->
+    <script src="js/drawPlayer.js"></script>
     <script src="js/Player_V1.js"></script>
     <script src="js/Platform_V1.js"></script>
     <script src="js/PlatformManager_V1.js"></script>
     <script src="js/Game_V1.js"></script>
     <script src="js/sketch_V1.js"></script>
-</body>
+  </body>
 </html>

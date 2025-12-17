@@ -1,7 +1,3 @@
-/**
- * Platform Class and Platform Types
- * Base class for platforms with inheritance for different types
- */
 class Platform {
   constructor(x, y, width = 60, height = 12, type = "normal") {
     this.x = x;
@@ -13,32 +9,10 @@ class Platform {
     this.isActive = true;
   }
 
-  /**
-   * Get color based on platform type
-   */
-  getColor() {
-    switch (this.type) {
-      case "normal":
-        return [100, 200, 255]; // Blue
-      case "moving":
-        return [255, 200, 100]; // Orange
-      case "breaking":
-        return [255, 150, 150]; // Pink
-      default:
-        return [100, 200, 255];
-    }
-  }
-
-  /**
-   * Update platform (override in subclasses)
-   */
   update() {
-    // Override in subclasses for specific behavior
+    // normal platform does nothing
   }
 
-  /**
-   * Display platform
-   */
   display() {
     fill(...this.color);
     stroke(255);
@@ -53,10 +27,19 @@ class Platform {
     noStroke();
   }
 
-  /**
-   * Check collision with player
-   * Returns true only if player lands on top of platform
-   */
+  getColor() {
+    switch (this.type) {
+      case "normal":
+        return [100, 200, 255]; // Blue
+      case "moving":
+        return [255, 200, 100]; // Orange
+      case "breaking":
+        return [255, 150, 150]; // Pink
+      default:
+        return [100, 200, 255];
+    }
+  }
+
   checkCollision(player) {
     if (!this.isActive) return false;
 
@@ -77,9 +60,6 @@ class Platform {
     return landingFromAbove && horizontalOverlap;
   }
 
-  /**
-   * Get platform bounds
-   */
   getBounds() {
     return {
       x: this.x - this.width / 2,
@@ -89,11 +69,6 @@ class Platform {
     };
   }
 }
-
-/**
- * MovingPlatform Class
- * Platform that oscillates left and right
- */
 class MovingPlatform extends Platform {
   constructor(x, y, width = 60, height = 12) {
     super(x, y, width, height, "moving");
@@ -103,19 +78,11 @@ class MovingPlatform extends Platform {
     this.time = 0;
   }
 
-  /**
-   * Update moving platform position
-   */
   update() {
     this.time += this.speed;
     this.x = this.startX + Math.sin(this.time) * this.amplitude;
   }
 }
-
-/**
- * BreakingPlatform Class
- * Platform that disappears when jumped on
- */
 class BreakingPlatform extends Platform {
   constructor(x, y, width = 60, height = 12) {
     super(x, y, width, height, "breaking");
@@ -124,9 +91,7 @@ class BreakingPlatform extends Platform {
     this.breakDuration = 30; // Frames before disappearing
   }
 
-  /**
-   * Update breaking platform
-   */
+  //update broken platform
   update() {
     if (this.isBroken) {
       this.breakDelay++;
@@ -136,9 +101,6 @@ class BreakingPlatform extends Platform {
     }
   }
 
-  /**
-   * Display with breaking animation
-   */
   display() {
     if (this.isBroken) {
       // Flash effect when breaking
@@ -163,9 +125,6 @@ class BreakingPlatform extends Platform {
     noStroke();
   }
 
-  /**
-   * Override collision to break platform
-   */
   checkCollision(player) {
     const result = super.checkCollision(player);
     if (result && !this.isBroken) {

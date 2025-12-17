@@ -1,7 +1,3 @@
-/**
- * PlatformManager Class
- * Manages all platforms: generation, updating, collision detection, removal
- */
 class PlatformManager {
   constructor(gameWidth, gameHeight) {
     this.platforms = [];
@@ -139,9 +135,6 @@ class PlatformManager {
     }
   }
 
-  /**
-   * Remove inactive or off-screen platforms to save memory
-   */
   cleanup(playerY) {
     // Remove platforms far below player
     for (let i = this.platforms.length - 1; i >= 0; i--) {
@@ -151,15 +144,11 @@ class PlatformManager {
     }
   }
 
-  /**
-   * Update all platforms
-   */
   update(playerY) {
     for (let platform of this.platforms) {
       platform.update();
     }
 
-    // ADD THESE LINES:
     this.updateLevel(playerY);
     this.platformSpacing = this.getPlatformSpacing(this.level);
     this.generatePlatforms(playerY);
@@ -167,10 +156,6 @@ class PlatformManager {
     this.difficulty = Math.abs(playerY);
   }
 
-  /**
-   * Check collision with all platforms
-   * Returns the platform collided with, or null
-   */
   checkCollisions(player) {
     for (let platform of this.platforms) {
       if (platform.checkCollision(player)) {
@@ -180,18 +165,12 @@ class PlatformManager {
     return null;
   }
 
-  /**
-   * Display all platforms
-   */
   display() {
     for (let platform of this.platforms) {
       platform.display();
     }
   }
 
-  /**
-   * Reset platform manager for new game
-   */
   reset() {
     this.platforms = [];
     this.difficulty = 0;
@@ -199,9 +178,6 @@ class PlatformManager {
     this.generateInitialPlatforms();
   }
 
-  /**
-   * Get number of active platforms
-   */
   getActivePlatformCount() {
     return this.platforms.filter((p) => p.isActive).length;
   }

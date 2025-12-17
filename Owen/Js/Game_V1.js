@@ -1,14 +1,8 @@
-/**
- * Game Class
- * Main game controller handling states, logic, and flow
- */
-
 class Game {
   constructor(width, height) {
     this.gameWidth = width;
     this.gameHeight = height;
 
-    // Game states: 'start', 'playing', 'gameOver'
     this.gameState = "start";
 
     // Game objects
@@ -26,9 +20,6 @@ class Game {
     this.currentLevel = 1;
   }
 
-  /**
-   * Initialize/Reset game
-   */
   reset() {
     // Create player at center bottom
     this.player = new Player(this.gameWidth / 2, this.gameHeight - 100, null);
@@ -42,17 +33,11 @@ class Game {
     );
   }
 
-  /**
-   * Start the game (transition from start screen)
-   */
   startGame() {
     this.gameState = "playing";
     this.reset();
   }
 
-  /**
-   * Main game update logic
-   */
   updateGame() {
     if (this.gameState !== "playing") return;
 
@@ -79,39 +64,25 @@ class Game {
     this.currentScore = this.player.score;
   }
 
-  /**
-   * End game and check high score
-   */
   endGame() {
     this.gameState = "gameOver";
 
-    // Check if new high score
     if (this.currentScore > this.highScore) {
       this.highScore = this.currentScore;
       localStorage.setItem("doodleJumpHighScore", this.highScore);
     }
   }
 
-  /**
-   * Reset to start screen
-   */
   resetToStart() {
     this.gameState = "start";
   }
 
-  /**
-   * Get camera offset (for scrolling)
-   */
   getCameraY() {
     // Simple: keep player in upper third
     return Math.max(this.player.y - this.gameHeight / 3);
   }
 
-  /**
-   * Display the game
-   */
   displayGame() {
-    // Clear background
     background(15, 52, 96);
 
     // Calculate camera offset
@@ -121,7 +92,6 @@ class Game {
     push();
     translate(0, -cameraY);
 
-    // Display game elements
     if (this.gameState === "playing") {
       this.platformManager.display();
       this.player.display();
@@ -140,9 +110,6 @@ class Game {
     }
   }
 
-  /**
-   * Display UI elements (score, platform count, etc)
-   */
   displayUI() {
     fill(255);
     textSize(20);
@@ -152,9 +119,6 @@ class Game {
     text("High Score: " + this.highScore, 20, 90);
   }
 
-  /**
-   * Display start screen
-   */
   displayStartScreen() {
     // Semi-transparent overlay
     fill(0, 0, 0, 150);
@@ -196,9 +160,6 @@ class Game {
     textAlign(LEFT);
   }
 
-  /**
-   * Display game over screen
-   */
   displayGameOverScreen() {
     // Semi-transparent overlay
     fill(0, 0, 0, 200);
@@ -241,9 +202,6 @@ class Game {
     textAlign(LEFT);
   }
 
-  /**
-   * Handle keyboard input for game state transitions
-   */
   handleInput() {
     if (keyCode === 32) {
       // SPACE key
@@ -254,17 +212,5 @@ class Game {
         this.startGame();
       }
     }
-  }
-  update() {
-    console.log("Player position:", this.x, this.y);
-    console.log("Velocity:", this.velocityX, this.velocityY);
-    console.log(
-      "Keys pressed - Left:",
-      this.movingLeft,
-      "Right:",
-      this.movingRight
-    );
-
-    this.handleInput();
   }
 }
