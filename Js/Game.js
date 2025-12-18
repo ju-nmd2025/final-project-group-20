@@ -52,6 +52,7 @@ class Game {
 
     // Update platforms
     this.platformManager.update(this.player.y);
+    
     // Get current level from platform manager and apply to player physics
     this.currentLevel = this.platformManager.getLevel();
 
@@ -188,7 +189,7 @@ class Game {
     textSize(20);
     if (this.currentScore === this.highScore && this.currentScore > 0) {
       fill(255, 200, 100);
-      text("NEW HIGH SCORE!", this.gameWidth / 2, this.gameHeight / 2 + 30);
+      text("NEW HIGH SCORE!", this.gameWidth / 2, this.gameHeight / 2 +  60 );
     }
 
     fill(100, 200, 255);

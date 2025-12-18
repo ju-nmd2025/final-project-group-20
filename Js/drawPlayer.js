@@ -7,7 +7,7 @@ function drawPlayer(player) {
 
   noStroke();
 
-  // --- 1. SHIRT & BODY ---
+  //SHIRT & BODY 
   for (let i = 0; i < 5; i++) {
     fill(250 - i * 8);
     arc(0, 25 + i * 2, 42 - i, 35, PI, 0);
@@ -125,7 +125,7 @@ function drawPlayer(player) {
     ellipse(13, 4, 1, 1);
   }
 
-  // --- 6. HAIR ---
+  // HAIR
   fill(15);
   arc(0, -6, 56, 54, PI, 0);
 
