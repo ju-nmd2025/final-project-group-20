@@ -75,6 +75,7 @@ class MovingPlatform extends Platform {
     this.startX = x;
     this.amplitude = 50; // How far it moves
     this.speed = 0.05; // Speed of oscillation
+    
     this.time = 0;
   }
 

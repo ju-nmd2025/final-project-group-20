@@ -7,7 +7,7 @@ class PlatformManager {
     // Generation parameters
     this.platformWidth = 60;
     this.platformHeight = 12;
-    this.verticalGap = 80; // Space between platforms initially
+    this.verticalGap = 80; 
     this.horizontalVariance = gameWidth - 40;
 
     // Difficulty scaling 
@@ -22,9 +22,7 @@ class PlatformManager {
     this.baseVerticalGap = 80;
   }
 
-  /**
-   * Generate initial platforms at game start
-   */
+  
   generateInitialPlatforms() {
     // Create platforms from bottom to top
     for (let i = 0; i < 15; i++) {
@@ -34,9 +32,7 @@ class PlatformManager {
     }
   }
 
-  /**
-   * Add a random platform type at given position
-   */
+  
   addRandomPlatform(x, y) {
     let platform;
     const rand = Math.random();
@@ -73,11 +69,10 @@ class PlatformManager {
 
   
    //Calculate level based on player height
-   //Every 1500 pixels = 1 level
   updateLevel(playerY) {
     const levelThreshold = 1500;
     this.level = Math.floor(Math.abs(playerY) / levelThreshold) + 1;
-    const levelCap = Math.min(this.level, 15);
+    const levelCap = Math.min(this.level, 8);
     return levelCap;
   }
 
@@ -170,7 +165,4 @@ class PlatformManager {
     this.generateInitialPlatforms();
   }
 
-  getActivePlatformCount() {
-    return this.platforms.filter((p) => p.isActive).length;
-  }
 }
