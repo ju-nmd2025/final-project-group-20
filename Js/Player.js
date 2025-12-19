@@ -1,5 +1,5 @@
 class Player {
-  constructor(x, y, img) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
 
@@ -35,7 +35,7 @@ class Player {
     if (this.velocityY > this.maxVelocityY) this.velocityY = this.maxVelocityY;
   }
 
-  jump() {
+  jump() {  
     this.velocityY = -this.jumpForce;
     this.isJumping = true;
   }
@@ -59,7 +59,7 @@ class Player {
     // Score
     if (this.y < this.maxHeight) {
       this.maxHeight = this.y;
-      this.score = Math.floor((2500 - this.maxHeight) / 10);
+      this.score = Math.floor((-this.maxHeight) / 10);
       if (this.score < 0) this.score = 0;
     }
   }
@@ -70,10 +70,6 @@ class Player {
 
   display() {
     drawPlayer(this);
-  }
-
-  isFallenOff(gameHeight) {
-    return this.y > gameHeight;
   }
 
   getBounds() {

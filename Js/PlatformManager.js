@@ -10,7 +10,7 @@ class PlatformManager {
     this.verticalGap = 80; // Space between platforms initially
     this.horizontalVariance = gameWidth - 40;
 
-    // Difficulty scaling (range 0-)
+    // Difficulty scaling 
     this.difficulty = 10;
     this.platformSpacing = this.verticalGap;
 
@@ -71,10 +71,9 @@ class PlatformManager {
     this.platforms.push(platform);
   }
 
-  /**
-   * Calculate level based on player height
-   * Every 1500 pixels = 1 level
-   */
+  
+   //Calculate level based on player height
+   //Every 1500 pixels = 1 level
   updateLevel(playerY) {
     const levelThreshold = 1500;
     this.level = Math.floor(Math.abs(playerY) / levelThreshold) + 1;
@@ -82,16 +81,13 @@ class PlatformManager {
     return levelCap;
   }
 
-  /**
-   * Get difficulty multiplier based on level
-   */
+  // Get difficulty multiplier based on level
   getDifficultyMultiplier(level) {
     return Math.min((level - 1) / 10, 0.7);
   }
 
-  /**
-   * Get platform spacing based on level
-   */
+  
+  // Get platform spacing based on level
   getPlatformSpacing(level) {
     const minGap = 40;
     const maxGap = 80;
@@ -99,16 +95,12 @@ class PlatformManager {
     return Math.max(minGap, maxGap - reduction);
   }
 
-  /**
-   * Get current level (for display)
-   */
+   //Get current level (for display)
   getLevel() {
     return this.level;
   }
 
-  /**
-   * Generate new platforms as player moves up
-   */
+  // Generate new platforms as player moves up
   generatePlatforms(playerY) {
     // Check if we need more platforms above player
     if (this.platforms.length === 0) {

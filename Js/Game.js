@@ -100,7 +100,7 @@ class Game {
 
     pop();
 
-    // Display UI (not affected by camera)
+    // Display UI 
     this.displayUI();
 
     // Display appropriate screen
